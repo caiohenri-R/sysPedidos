@@ -86,7 +86,7 @@
     function preencher(id_estado, nome_estado, nome_uf) {
         console.log(id_estado, nome_estado, nome_uf);
         document.getElementById("tx_id").value = id_estado;
-        document.getElementById("tx_nome").value = nome_estado;
+        document.getElementById("tx_nome").value = decodeURI(nome_estado);
         document.getElementById("tx_uf").value = nome_uf;
     }
     // Função para carregar a listagem de estados via AJAX
@@ -98,7 +98,7 @@
                 var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>UF</th> <th> Ações </th></tr>";
                 for (var estado of dados) {
                     conteudo += "<tr> <td>" + estado.id + " </td> <td>" + estado.nome + "</td> <td>" + estado.uf + "</td>";
-                    conteudo += "<td> <button type='button' onclick=preencher('" + estado.id + "','" + estado.nome + "','" + estado.uf + "')>Alterar</button> ";
+                    conteudo += "<td> <button type='button' onclick=preencher('" + estado.id + "','" + encodeURI(estado.nome) + "','" + estado.uf + "')>Alterar</button> ";
                     conteudo += "<button type='button' onclick='excluir(" + estado.id + ")'>Excluir</button></td></tr>";
                 }
                 document.getElementById("listagem").innerHTML = conteudo;
