@@ -34,7 +34,7 @@ public class Produto {
     private String descricao;
 
     @Column(name = "dbl_quantidade_estoque")
-    private Double quatidade_estoqque;
+    private Double quantidade_estoque;
 
     @Column(name = "nu_preco_unidade_atual")
     private BigDecimal preco_und_atual;
