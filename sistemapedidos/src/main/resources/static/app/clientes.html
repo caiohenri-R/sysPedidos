@@ -2,55 +2,147 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet" />
     <title>Clientes</title>
 </head>
 
 <body>
-
-    <h1> Listagem de Clientes</h1>
-    <div>
-        <p>Listagem de Clientes</p>
+    <main>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">SisPedidos</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/app/index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/estados.html">Estados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/municipios.html">Municípios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/clientes.html">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/produtos.html">Produtos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </main>
+    <div class="container mt-4">
+        <h2 style="text-align: center;"><i class="bi bi-people-fill"></i>&nbsp;Listagem de Clientes</h2>
+        <hr>
         <form>
-            <label>ID:</label>
-            <input type="text" id="tx_id" readonly="readonly" disabled="disabled" />
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_id" class="input-group-text "><i class="bi bi-hash"></i></label>
+                            <input type="text" placeholder="Identificador único" class="form-control" id="tx_id"
+                                readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_nome_razao_social" class="input-group-text "><i
+                                    class="bi-person"></i></label>
+                            <input type="text" placeholder="Razão Social" class="form-control"
+                                id="tx_nome_razao_social">
+                        </div>
+                    </div>
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_cpf" class="input-group-text "><i class="bi-person-vcard"></i></label>
+                            <input type="text" placeholder="CPF" class="form-control" id="tx_cpf" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_cnpj" class="input-group-text "><i class="bi-person-vcard"></i></label>
+                            <input type="text" placeholder="CNPJ" class="form-control" id="tx_cnpj" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_telefone" class="input-group-text "><i
+                                    class="bi bi-telephone-inbound"></i></label>
+                            <input type="text" placeholder="Telefone: (xx) xxxxx-xxxx" class="form-control"
+                                id="tx_telefone">
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_endereco" class="input-group-text "><i class="bi bi-house-add"></i></label>
+                            <input type="text" placeholder="Endereço" class="form-control" id="tx_endereco">
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_bairro" class="input-group-text "><i class="bi bi-building-add"></i></label>
+                            <input type="text" placeholder="Bairro" class="form-control" id="tx_bairro">
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_email" class="input-group-text "><i class="bi bi-envelope-at"></i></label>
+                            <input type="text" placeholder="E-mail" class="form-control" id="tx_email">
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label for="tx_informacoes" class="input-group-text "><i
+                                    class="bi bi-info-square"></i></label>
+                            <input type="text" placeholder="Informações" class="form-control" id="tx_informacoes">
+                        </div>
+                    </div>
+
+                    <div class="mx-auto">
+                        <div class="input-group mb-1">
+                            <label class="input-group-text"><i class="bi bi-check2-square"></i></label>
+                            <select class="form-control" id="bo_ativo">
+                                <option value="" hidden>Selecione uma situação..</option>
+                                <option value="true">Ativo</option>
+                                <option value="false">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br>
-            <label>NOME:</label>
-            <input type="text" id="tx_nome_razao_social" />
-            <br>
-            <label>CPF:</label>
-            <input type="text" id="tx_cpf" />
-            <br>
-            <label>CNPJ:</label>
-            <input type="text" id="tx_cnpj" />
-            <br>
-            <label>TELEFONE:</label>
-            <input type="text" id="tx_telefone" />
-            <br>
-            <label>ENEDREÇO:</label>
-            <input type="text" id="tx_endereco" />
-            <br>
-            <label>BAIRRO:</label>
-            <input type="text" id="tx_bairro" />
-            <br>
-            <label>CEP:</label>
-            <input type="text" id="tx_cep" />
-            <br>
-            <label>EMAIL:</label>
-            <input type="text" id="tx_email" />
-            <br>
-            <label>ATIVO:</label>
-            <input type="text" id="bo_ativo" />
-            <br>
-            <label>INFORMACOES:</label>
-            <input type="text" id="tx_informacoes" />
-            <br>
-            <button type="button" onclick="criar()">Criar</button>
-            <button type="button" onclick="alterar()">Alterar</button>
-            <button type="button" onclick="carregar()">Listar</button>
-            <button type="button" onclick="limpar()">Limpar</button>
+            <div class="form-group mb-1 row">
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary mr-2" onclick="criar()"><i
+                            class="bi bi-person-plus-fill"></i>&nbsp;&nbsp;&nbsp;Criar</button>
+                    <button type="button" class="btn btn-primary mr-2" onclick="alterar()"><i
+                            class="bi bi-pencil"></i>&nbsp;Alterar</button>
+                    <button type="button" class="btn btn-primary mr-2" onclick="carregar()"><i
+                            class="bi bi-list-check"></i>&nbsp;&nbsp;Listar</button>
+                    <button type="button" class="btn btn-secondary" onclick="limpar()"><i
+                            class="bi bi-trash"></i>&nbsp;Limpar</button>
+                </div>
+            </div>
         </form>
-        <table border="1" id="listagem"></table>
+        <table class="table table-striped mt-4" border="1" id="listagem"></table>
     </div>
+
+
 </body>
 <script>
     // Função para limpar os campos do formulário
@@ -135,7 +227,7 @@
     }
 
 
-    // Função para carregar a listagem de clientes via AJAX
+    // Função para carregar a listagem de clientes
     function carregar() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -143,9 +235,10 @@
                 var dados = JSON.parse(this.responseText);
                 var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>CNPJ</th> <th>Telefone</th> <th>Endereço</th> <th>Bairro</th> <th>CEP</th> <th>E-mail</th> <th>Ativo</th> <th>Informações</th> <th> Ações </th></tr>";
                 for (var cliente of dados) {
-                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + cliente.nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + cliente.ativo + "</td> <td>" + cliente.informacoes + "</td>";
-                    conteudo += "<td> <button type='button' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.telefone + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')>Alterar</button> ";
-                    conteudo += "<button type='button' onclick='excluir(" + cliente.id + ")'>Excluir</button></td></tr>";
+                    var nome = String(cliente.nome_razao_social);
+                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
+                    conteudo += "<td> <button type='button' class='bi bi-pencil btn btn-primary m-1' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
+                    conteudo += "<button type='button' class='bi bi-trash btn btn-secondary m-1' onclick='excluir(" + cliente.id + ")'></button></td></tr>";
                 }
                 document.getElementById("listagem").innerHTML = conteudo;
                 limpar();
@@ -156,6 +249,7 @@
         xhttp.open("GET", "/clientes");
         xhttp.send();
     }
+
 </script>
 
 
