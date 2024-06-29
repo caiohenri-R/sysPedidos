@@ -61,17 +61,22 @@
                                 id="tx_nome_razao_social">
                         </div>
                     </div>
-                    <div class="mx-auto">
-                        <div class="input-group mb-1">
-                            <label for="tx_cpf" class="input-group-text "><i class="bi-person-vcard"></i></label>
-                            <input type="text" placeholder="CPF" class="form-control" id="tx_cpf" readonly disabled>
-                        </div>
-                    </div>
 
-                    <div class="mx-auto">
-                        <div class="input-group mb-1">
-                            <label for="tx_cnpj" class="input-group-text "><i class="bi-person-vcard"></i></label>
-                            <input type="text" placeholder="CNPJ" class="form-control" id="tx_cnpj" readonly disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
+                                <label for="tx_cpf" class="input-group-text "><i
+                                        class="bi bi-person-video2"></i></label>
+                                <input type="text" placeholder="CPF" class="form-control" id="tx_cpf" readonly disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
+                                <label for="tx_cnpj" class="input-group-text "><i class="bi-person-vcard"></i></label>
+                                <input type="text" placeholder="CNPJ" class="form-control" id="tx_cnpj" readonly
+                                    disabled>
+                            </div>
                         </div>
                     </div>
 
@@ -84,17 +89,33 @@
                         </div>
                     </div>
 
-                    <div class="mx-auto">
-                        <div class="input-group mb-1">
-                            <label for="tx_endereco" class="input-group-text "><i class="bi bi-house-add"></i></label>
-                            <input type="text" placeholder="Endereço" class="form-control" id="tx_endereco">
+                    <!-- me identificar na div-->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
+                                <label for="tx_endereco" class="input-group-text "><i
+                                        class="bi bi-house-add"></i></label>
+                                <input type="text" placeholder="Endereço" class="form-control" id="tx_endereco">
+                            </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
+                                <label for="tx_bairro" class="input-group-text "><i
+                                        class="bi bi-building-add"></i></label>
+                                <input type="text" placeholder="Bairro" class="form-control" id="tx_bairro">
+                            </div>
+                        </div>
+
                     </div>
+
+                    <!-- me identificar na div-->
 
                     <div class="mx-auto">
                         <div class="input-group mb-1">
-                            <label for="tx_bairro" class="input-group-text "><i class="bi bi-building-add"></i></label>
-                            <input type="text" placeholder="Bairro" class="form-control" id="tx_bairro">
+                            <label for="tx_cep" class="input-group-text "><i class="bi bi-terminal-plus"></i></label>
+                            <input type="text" placeholder="CEP" class="form-control" id="tx_cep">
                         </div>
                     </div>
 
@@ -115,9 +136,9 @@
 
                     <div class="mx-auto">
                         <div class="input-group mb-1">
-                            <label class="input-group-text"><i class="bi bi-check2-square"></i></label>
+                            <label for="bo_ativo" class="input-group-text"><i class="bi bi-check2-square"></i></label>
                             <select class="form-control" id="bo_ativo">
-                                <option value="" hidden>Selecione uma situação..</option>
+                                <option value="" hidden>Selecione uma situação...</option>
                                 <option value="true">Ativo</option>
                                 <option value="false">Inativo</option>
                             </select>
@@ -139,8 +160,9 @@
                 </div>
             </div>
         </form>
-        <table class="table table-striped mt-4" border="1" id="listagem"></table>
+        <table class="table table-bordered table-striped mt-4" border="1" id="listagem"></table>
     </div>
+
 
 
 </body>
@@ -223,7 +245,7 @@
         }
         xhttp.open("POST", "/cliente");
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify({ id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById(tx_bairro).value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value }));
+        xhttp.send(JSON.stringify({ id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value }));
     }
 
 
@@ -237,8 +259,8 @@
                 for (var cliente of dados) {
                     var nome = String(cliente.nome_razao_social);
                     conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
-                    conteudo += "<td> <button type='button' class='bi bi-pencil btn btn-primary m-1' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
-                    conteudo += "<button type='button' class='bi bi-trash btn btn-secondary m-1' onclick='excluir(" + cliente.id + ")'></button></td></tr>";
+                    conteudo += "<td> <button type='button' class='bi bi-pencil-square btn btn-primary m-1' title='Alterar' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
+                    conteudo += "<button type='button' class='bi bi-trash btn btn-secondary m-1' onclick='excluir(" + cliente.id + ")' title='Excluir'></button></td></tr>";
                 }
                 document.getElementById("listagem").innerHTML = conteudo;
                 limpar();
