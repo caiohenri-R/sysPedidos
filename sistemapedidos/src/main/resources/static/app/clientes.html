@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="mx-auto">
                         <div class="input-group mb-1">
-                            <label for="tx_id" class="input-group-text "><i class="bi bi-hash"></i></label>
+                            <label for="tx_id" class="input-group-text"><i class="bi bi-hash"></i></label>
                             <input type="text" placeholder="Identificador único" class="form-control" id="tx_id"
                                 readonly disabled>
                         </div>
@@ -94,6 +94,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mb-1">
+                                <label for="tx_id_estado" class="input-group-text ">
+                                    <i class="bi bi-map"></i></label>
+                                <select class="form-control" id="tx_id_estado">
+                                    <option value="" hidden>Selecione um estado...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
+                                <label for="tx_id_municipio" class="input-group-text "><i
+                                        class="bi bi-geo-alt"></i></label>
+                                <select class="form-control" id="tx_id_municipio">
+                                    <option value="" hidden>Selecione um município...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-1">
                                 <label for="tx_endereco" class="input-group-text "><i
                                         class="bi bi-house-add"></i></label>
                                 <input type="text" placeholder="Endereço" class="form-control" id="tx_endereco">
@@ -130,7 +150,7 @@
                         <div class="input-group mb-1">
                             <label for="tx_informacoes" class="input-group-text "><i
                                     class="bi bi-info-square"></i></label>
-                            <input type="text" placeholder="Informações" class="form-control" id="tx_informacoes">
+                            <textarea class="form-control" id="tx_informacoes" placeholder="Informações"></textarea>
                         </div>
                     </div>
 
@@ -174,6 +194,7 @@
         document.getElementById("tx_cpf").value = "";
         document.getElementById("tx_cnpj").value = "";
         document.getElementById("tx_telefone").value = "";
+        document.getElementById("tx_id_municipio").value = "";
         document.getElementById("tx_endereco").value = "";
         document.getElementById("tx_bairro").value = "";
         document.getElementById("tx_cep").value = "";
@@ -200,13 +221,14 @@
 
 
     // Função para preencher/alterar os campos do formulário com os dados de um cliente
-    function preencher(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes) {
-        console.log(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes);
+    function preencher(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes) {
+        console.log(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes);
         document.getElementById("tx_id").value = id_cliente;
         document.getElementById("tx_nome_razao_social").value = decodeURI(nome_cliente);
         document.getElementById("tx_cpf").value = cliente_cpf;
         document.getElementById("tx_cnpj").value = cliente_cnpj;
         document.getElementById("tx_telefone").value = cliente_telefone;
+        document.getElementById("tx_id_municipio").value = municipio;
         document.getElementById("tx_endereco").value = decodeURI(nome_endereco);
         document.getElementById("tx_bairro").value = decodeURI(nome_bairro);
         document.getElementById("tx_cep").value = cliente_cep;
@@ -229,7 +251,7 @@
         }
         xhttp.open("PUT", "/cliente/" + document.getElementById("tx_id").value);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify({ id: document.getElementById("tx_id").value, nome: document.getElementById("tx_nome_razao_social").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById(tx_bairro).value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value }));
+        xhttp.send(JSON.stringify({ id: document.getElementById("tx_id").value, nome: document.getElementById("tx_nome_razao_social").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById(tx_bairro).value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value, municipio: document.getElementById("tx_id_municipio") }));
     }
 
 
@@ -245,7 +267,14 @@
         }
         xhttp.open("POST", "/cliente");
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify({ id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value }));
+        xhttp.send(JSON.stringify({
+            id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value,
+            municipio: {
+                id: document.getElementById("tx_id_municipio").value  // Captura o id do município selecionado
+            }
+
+
+        }));
     }
 
 
@@ -255,11 +284,12 @@
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var dados = JSON.parse(this.responseText);
-                var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>CNPJ</th> <th>Telefone</th> <th>Endereço</th> <th>Bairro</th> <th>CEP</th> <th>E-mail</th> <th>Ativo</th> <th>Informações</th> <th> Ações </th></tr>";
+                var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>CNPJ</th> <th>Telefone</th> <th>Município</th> <th>Endereço</th> <th>Bairro</th> <th>CEP</th> <th>E-mail</th> <th>Ativo</th> <th>Informações</th> <th> Ações </th></tr>";
                 for (var cliente of dados) {
                     var nome = String(cliente.nome_razao_social);
-                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
-                    conteudo += "<td> <button type='button' class='bi bi-pencil-square btn btn-primary m-1' title='Alterar' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
+                    var municipio = cliente.municipio ? cliente.municipio.nome : '-';
+                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td><td>" + municipio + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
+                    conteudo += "<td> <button type='button' class='bi bi-pencil-square btn btn-primary m-1' title='Alterar' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + municipio + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
                     conteudo += "<button type='button' class='bi bi-trash btn btn-secondary m-1' onclick='excluir(" + cliente.id + ")' title='Excluir'></button></td></tr>";
                 }
                 document.getElementById("listagem").innerHTML = conteudo;
@@ -270,7 +300,33 @@
         };
         xhttp.open("GET", "/clientes");
         xhttp.send();
+
     }
+
+
+    function carregarMunicipios() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var municipios = JSON.parse(this.responseText);
+                var selectMunicipio = document.getElementById("tx_id_municipio");
+                selectMunicipio.innerHTML = '<option value="" hidden>Selecione um município...</option>';
+                municipios.forEach(function (municipio) {
+                    var option = document.createElement("option");
+                    option.value = municipio.id;
+                    option.textContent = municipio.nome;
+                    selectMunicipio.appendChild(option);
+                });
+            }
+        };
+        xhttp.open("GET", "/municipios");
+        xhttp.send();
+    }
+    carregarMunicipios();
+
+
+
+
 
 </script>
 
