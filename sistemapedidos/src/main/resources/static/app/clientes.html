@@ -104,9 +104,9 @@
 
                         <div class="col-md-6">
                             <div class="input-group mb-1">
-                                <label for="tx_id_municipio" class="input-group-text "><i
+                                <label for="id_municipio" class="input-group-text "><i
                                         class="bi bi-geo-alt"></i></label>
-                                <select class="form-control" id="tx_id_municipio">
+                                <select class="form-control" id="id_municipio">
                                     <option value="" hidden>Selecione um município...</option>
                                 </select>
                             </div>
@@ -194,7 +194,7 @@
         document.getElementById("tx_cpf").value = "";
         document.getElementById("tx_cnpj").value = "";
         document.getElementById("tx_telefone").value = "";
-        document.getElementById("tx_id_municipio").value = "";
+        document.getElementById("id_municipio").value = "";
         document.getElementById("tx_endereco").value = "";
         document.getElementById("tx_bairro").value = "";
         document.getElementById("tx_cep").value = "";
@@ -228,7 +228,7 @@
         document.getElementById("tx_cpf").value = cliente_cpf;
         document.getElementById("tx_cnpj").value = cliente_cnpj;
         document.getElementById("tx_telefone").value = cliente_telefone;
-        document.getElementById("tx_id_municipio").value = municipio_nome_cliente;
+        document.getElementById("id_municipio").value = municipio_nome_cliente;
         document.getElementById("tx_endereco").value = decodeURI(cliente_endereco);
         document.getElementById("tx_bairro").value = decodeURI(cliente_bairro);
         document.getElementById("tx_cep").value = cliente_cep;
@@ -251,7 +251,7 @@
         }
         xhttp.open("PUT", "/cliente/" + document.getElementById("tx_id").value);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify({ id: document.getElementById("tx_id").value, nome: document.getElementById("tx_nome_razao_social").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById(tx_bairro).value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value, municipio: document.getElementById("tx_id_municipio") }));
+        xhttp.send(JSON.stringify({ id: document.getElementById("tx_id").value, nome_razao_social: document.getElementById("tx_nome_razao_social").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById(tx_bairro).value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value, municipio: document.getElementById("id_municipio") }));
     }
 
 
@@ -270,7 +270,7 @@
         xhttp.send(JSON.stringify({
             id: null, nome_razao_social: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value,
             municipio: {
-                id: document.getElementById("tx_id_municipio").value // Captura o id do município selecionado
+                id: document.getElementById("id_municipio").value // Captura o id do município selecionado
             }
 
 
@@ -309,7 +309,7 @@
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var municipios = JSON.parse(this.responseText);
-                var selectMunicipio = document.getElementById("tx_id_municipio");
+                var selectMunicipio = document.getElementById("id_municipio");
                 selectMunicipio.innerHTML = '<option value="" hidden>Selecione um município...</option>';
                 municipios.forEach(function (municipio) {
                     var option = document.createElement("option");
