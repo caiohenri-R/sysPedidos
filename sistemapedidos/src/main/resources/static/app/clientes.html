@@ -221,16 +221,16 @@
 
 
     // Função para preencher/alterar os campos do formulário com os dados de um cliente
-    function preencher(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes) {
-        console.log(id_cliente, nome_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio, nome_endereco, nome_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes);
+    function preencher(id_cliente, nome_razao_social_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio_nome_cliente, cliente_endereco, cliente_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes) {
+        console.log(id_cliente, nome_razao_social_cliente, cliente_cpf, cliente_cnpj, cliente_telefone, municipio_nome_cliente, cliente_endereco, cliente_bairro, cliente_cep, cliente_email, cliente_ativo, cliente_informacoes);
         document.getElementById("tx_id").value = id_cliente;
-        document.getElementById("tx_nome_razao_social").value = decodeURI(nome_cliente);
+        document.getElementById("tx_nome_razao_social").value = decodeURI(nome_razao_social_cliente);
         document.getElementById("tx_cpf").value = cliente_cpf;
         document.getElementById("tx_cnpj").value = cliente_cnpj;
         document.getElementById("tx_telefone").value = cliente_telefone;
-        document.getElementById("tx_id_municipio").value = municipio;
-        document.getElementById("tx_endereco").value = decodeURI(nome_endereco);
-        document.getElementById("tx_bairro").value = decodeURI(nome_bairro);
+        document.getElementById("tx_id_municipio").value = municipio_nome_cliente;
+        document.getElementById("tx_endereco").value = decodeURI(cliente_endereco);
+        document.getElementById("tx_bairro").value = decodeURI(cliente_bairro);
         document.getElementById("tx_cep").value = cliente_cep;
         document.getElementById("tx_email").value = cliente_email;
         document.getElementById("bo_ativo").value = cliente_ativo;
@@ -271,6 +271,7 @@
             id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value,
             municipio: {
                 id: document.getElementById("tx_id_municipio").value  // Captura o id do município selecionado
+                id: document.getElementById("tx_id_municipio").value // Captura o id do município selecionado
             }
 
 
@@ -286,10 +287,10 @@
                 var dados = JSON.parse(this.responseText);
                 var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>CNPJ</th> <th>Telefone</th> <th>Município</th> <th>Endereço</th> <th>Bairro</th> <th>CEP</th> <th>E-mail</th> <th>Ativo</th> <th>Informações</th> <th> Ações </th></tr>";
                 for (var cliente of dados) {
-                    var nome = String(cliente.nome_razao_social);
-                    var municipio = cliente.municipio ? cliente.municipio.nome : '-';
-                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + nome + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td><td>" + municipio + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
-                    conteudo += "<td> <button type='button' class='bi bi-pencil-square btn btn-primary m-1' title='Alterar' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + municipio + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
+                    /*var nome = String(cliente.nome_razao_social);*/
+                    /*var municipio = cliente.municipio ? cliente.municipio.nome : '-'*/
+                    conteudo += "<tr> <td>" + cliente.id + " </td> <td>" + cliente.nome_razao_social + "</td> <td>" + cliente.cpf + "</td> <td>" + cliente.cnpj + "</td> <td>" + cliente.telefone + "</td><td>" + cliente.municipio.nome + "</td> <td>" + cliente.endereco + "</td> <td>" + cliente.bairro + "</td> <td>" + cliente.cep + "</td> <td>" + cliente.email + "</td> <td>" + (cliente.ativo ? 'Sim' : 'Não') + "</td> <td>" + cliente.informacoes + "</td>";
+                    conteudo += "<td> <button type='button' class='bi bi-pencil-square btn btn-primary m-1' title='Alterar' onclick=preencher('" + cliente.id + "','" + encodeURI(cliente.nome_razao_social) + "','" + cliente.cpf + "','" + cliente.cnpj + "','" + cliente.telefone + "','" + cliente.municipio.nome + "','" + encodeURI(cliente.endereco) + "','" + encodeURI(cliente.bairro) + "','" + cliente.cep + "','" + cliente.email + "','" + cliente.ativo + "','" + encodeURI(cliente.informacoes) + "')></button>";
                     conteudo += "<button type='button' class='bi bi-trash btn btn-secondary m-1' onclick='excluir(" + cliente.id + ")' title='Excluir'></button></td></tr>";
                 }
                 document.getElementById("listagem").innerHTML = conteudo;
