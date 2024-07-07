@@ -268,9 +268,8 @@
         xhttp.open("POST", "/cliente");
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify({
-            id: null, nome: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value,
+            id: null, nome_razao_social: document.getElementById("tx_nome_razao_social").value, cpf: document.getElementById("tx_cpf").value, cnpj: document.getElementById("tx_cnpj").value, telefone: document.getElementById("tx_telefone").value, endereco: document.getElementById("tx_endereco").value, bairro: document.getElementById("tx_bairro").value, cep: document.getElementById("tx_cep").value, email: document.getElementById("tx_email").value, ativo: document.getElementById("bo_ativo").value, informacoes: document.getElementById("tx_informacoes").value,
             municipio: {
-                id: document.getElementById("tx_id_municipio").value  // Captura o id do município selecionado
                 id: document.getElementById("tx_id_municipio").value // Captura o id do município selecionado
             }
 
