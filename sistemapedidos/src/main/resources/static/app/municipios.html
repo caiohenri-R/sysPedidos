@@ -30,7 +30,7 @@
         <br>
 
         <button type="button" onclick="criar()">Criar</button>
-        <button type="button" onclick="carregar()">Carregar Municípios</button>
+        <button type="button" onclick="carregar()">Listar Municípios</button>
     </form>
     <table class="table table-bordered table-striped mt-4" border="1" id="listagem"></table>
 </body>
@@ -64,7 +64,7 @@
                 console.log(this.responseText);
                 var dados = JSON.parse(this.responseText);
                 console.log(dados);
-                var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>Estado</th> <th>UF</th>  <th>Entrega</th> <th>Ações</th></tr>";
+                var conteudo = "<tr> <th>ID</th> <th>Nome</th> <th>Estado</th> <th>UF</th>  <th>Entrega</th></tr>";
                 for (var municipio of dados) {
                     conteudo += "<tr><td>" + municipio.id + "</td> <td>" + municipio.nome + "</td> <td>" + municipio.estado.nome + "</td> <td>" + municipio.estado.uf + "</td> <td>" + (municipio.entrega ? "Sim" : "Não") + "</td></tr>";
                 }
